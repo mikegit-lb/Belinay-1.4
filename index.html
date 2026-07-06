@@ -1,0 +1,1736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>B1 Speaking Lesson | Heroes & Role Models</title>
+  <style>
+    :root{
+      --bg:#07111f;
+      --panel:#0f1d31;
+      --panel2:#13243b;
+      --gold:#c7a86d;
+      --blue:#4da3ff;
+      --white:#ffffff;
+      --muted:#b8c5d6;
+      --soft:#dce7f5;
+      --green:#54d6a0;
+      --red:#ff7373;
+      --orange:#ffba5c;
+      --shadow:0 18px 45px rgba(0,0,0,.35);
+      --radius:22px;
+    }
+
+    *{
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:Inter, Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(77,163,255,.2), transparent 32%),
+        radial-gradient(circle at 85% 15%, rgba(199,168,109,.18), transparent 30%),
+        linear-gradient(135deg, #07111f 0%, #0b1627 45%, #07111f 100%);
+      color:var(--white);
+      line-height:1.65;
+    }
+
+    h1,h2,h3{
+      font-family:"Segoe UI", Inter, Arial, sans-serif;
+      line-height:1.15;
+      margin:0 0 16px;
+    }
+
+    h1{
+      font-size:clamp(2.2rem, 5vw, 4.8rem);
+      letter-spacing:-.05em;
+    }
+
+    h2{
+      font-size:clamp(1.6rem, 3vw, 2.5rem);
+      color:var(--white);
+    }
+
+    h3{
+      color:var(--gold);
+      font-size:1.35rem;
+    }
+
+    p{
+      color:var(--soft);
+      margin:0 0 14px;
+    }
+
+    button, input, textarea, select{
+      font:inherit;
+    }
+
+    a{
+      color:var(--blue);
+    }
+
+    .app{
+      min-height:100vh;
+    }
+
+    .hero{
+      position:relative;
+      padding:42px 22px 34px;
+      overflow:hidden;
+      border-bottom:1px solid rgba(255,255,255,.08);
+    }
+
+    .hero-inner{
+      max-width:1180px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1.25fr .75fr;
+      gap:28px;
+      align-items:center;
+    }
+
+    .badge-row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      padding:8px 12px;
+      border-radius:999px;
+      color:var(--white);
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      font-size:.88rem;
+    }
+
+    .badge.gold{
+      background:rgba(199,168,109,.16);
+      border-color:rgba(199,168,109,.42);
+      color:#ffe4aa;
+    }
+
+    .hero-card{
+      background:linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:24px;
+    }
+
+    .hero-card .big-icon{
+      font-size:4rem;
+      margin-bottom:8px;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top:24px;
+    }
+
+    .btn{
+      border:none;
+      border-radius:16px;
+      padding:12px 16px;
+      cursor:pointer;
+      background:var(--blue);
+      color:#06111f;
+      font-weight:800;
+      transition:.2s ease;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+      filter:brightness(1.05);
+    }
+
+    .btn.secondary{
+      background:rgba(255,255,255,.08);
+      color:var(--white);
+      border:1px solid rgba(255,255,255,.14);
+    }
+
+    .btn.gold{
+      background:var(--gold);
+      color:#111;
+    }
+
+    .layout{
+      max-width:1180px;
+      margin:0 auto;
+      padding:24px 22px 60px;
+      display:grid;
+      grid-template-columns:270px 1fr;
+      gap:24px;
+      align-items:start;
+    }
+
+    .sidebar{
+      position:sticky;
+      top:14px;
+      background:rgba(15,29,49,.78);
+      backdrop-filter:blur(12px);
+      border:1px solid rgba(255,255,255,.11);
+      border-radius:var(--radius);
+      padding:14px;
+      box-shadow:var(--shadow);
+    }
+
+    .nav-title{
+      font-weight:900;
+      color:var(--gold);
+      padding:10px 10px 6px;
+      font-size:.9rem;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+    }
+
+    .nav{
+      display:grid;
+      gap:7px;
+    }
+
+    .nav a{
+      text-decoration:none;
+      color:var(--soft);
+      padding:10px 12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.04);
+      border:1px solid transparent;
+      font-size:.94rem;
+    }
+
+    .nav a:hover,
+    .nav a.active{
+      background:rgba(77,163,255,.14);
+      border-color:rgba(77,163,255,.35);
+      color:var(--white);
+    }
+
+    .progress-wrap{
+      margin:14px 10px 8px;
+    }
+
+    .progress-label{
+      display:flex;
+      justify-content:space-between;
+      color:var(--muted);
+      font-size:.82rem;
+      margin-bottom:6px;
+    }
+
+    .progress{
+      height:9px;
+      background:rgba(255,255,255,.09);
+      border-radius:999px;
+      overflow:hidden;
+    }
+
+    .progress span{
+      display:block;
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg, var(--gold), var(--blue));
+      border-radius:999px;
+      transition:.25s;
+    }
+
+    .content{
+      display:grid;
+      gap:24px;
+    }
+
+    section{
+      background:rgba(15,29,49,.82);
+      border:1px solid rgba(255,255,255,.11);
+      border-radius:var(--radius);
+      padding:26px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .section-kicker{
+      color:var(--blue);
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-size:.82rem;
+      margin-bottom:8px;
+    }
+
+    .grid{
+      display:grid;
+      gap:16px;
+    }
+
+    .grid.two{
+      grid-template-columns:repeat(2, minmax(0,1fr));
+    }
+
+    .grid.three{
+      grid-template-columns:repeat(3, minmax(0,1fr));
+    }
+
+    .card{
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:18px;
+      padding:18px;
+    }
+
+    .card.dark{
+      background:rgba(0,0,0,.16);
+    }
+
+    .card.blue{
+      background:rgba(77,163,255,.1);
+      border-color:rgba(77,163,255,.24);
+    }
+
+    .card.gold{
+      background:rgba(199,168,109,.1);
+      border-color:rgba(199,168,109,.28);
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      border-radius:999px;
+      padding:5px 10px;
+      font-size:.82rem;
+      font-weight:800;
+      color:#07111f;
+      background:var(--gold);
+      margin:4px 5px 4px 0;
+    }
+
+    .pill.blue{
+      background:var(--blue);
+    }
+
+    .pill.green{
+      background:var(--green);
+    }
+
+    .small{
+      font-size:.92rem;
+      color:var(--muted);
+    }
+
+    .note{
+      border-left:4px solid var(--gold);
+      padding:14px 16px;
+      background:rgba(199,168,109,.09);
+      border-radius:14px;
+      color:#ffe8b7;
+      margin:14px 0;
+    }
+
+    .mistake-table,
+    .vocab-table,
+    .rubric-table{
+      width:100%;
+      border-collapse:collapse;
+      overflow:hidden;
+      border-radius:16px;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+    }
+
+    th,td{
+      padding:12px;
+      text-align:left;
+      vertical-align:top;
+      border-bottom:1px solid rgba(255,255,255,.09);
+      color:var(--soft);
+    }
+
+    th{
+      color:var(--white);
+      background:rgba(255,255,255,.08);
+    }
+
+    tr:hover td{
+      background:rgba(255,255,255,.035);
+    }
+
+    .tabs{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin:16px 0 18px;
+    }
+
+    .tab-btn{
+      border:none;
+      border-radius:999px;
+      padding:9px 13px;
+      cursor:pointer;
+      background:rgba(255,255,255,.08);
+      color:var(--soft);
+      border:1px solid rgba(255,255,255,.1);
+      font-weight:800;
+    }
+
+    .tab-btn.active{
+      background:var(--blue);
+      color:#06111f;
+    }
+
+    .tab-panel{
+      display:none;
+    }
+
+    .tab-panel.active{
+      display:block;
+    }
+
+    .flash-grid{
+      display:grid;
+      grid-template-columns:repeat(5, minmax(0,1fr));
+      gap:12px;
+    }
+
+    .flashcard{
+      min-height:144px;
+      perspective:1000px;
+      cursor:pointer;
+    }
+
+    .flash-inner{
+      position:relative;
+      height:100%;
+      min-height:144px;
+      transition:transform .55s;
+      transform-style:preserve-3d;
+    }
+
+    .flashcard.flipped .flash-inner{
+      transform:rotateY(180deg);
+    }
+
+    .flash-front,
+    .flash-back{
+      position:absolute;
+      inset:0;
+      backface-visibility:hidden;
+      border-radius:17px;
+      padding:15px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      border:1px solid rgba(255,255,255,.12);
+    }
+
+    .flash-front{
+      background:linear-gradient(145deg, rgba(77,163,255,.18), rgba(255,255,255,.04));
+    }
+
+    .flash-back{
+      background:linear-gradient(145deg, rgba(199,168,109,.2), rgba(255,255,255,.05));
+      transform:rotateY(180deg);
+    }
+
+    .word{
+      font-size:1.05rem;
+      font-weight:900;
+      color:var(--white);
+    }
+
+    .tr{
+      color:#ffe4aa;
+      font-weight:800;
+      font-size:.95rem;
+    }
+
+    .example{
+      color:var(--muted);
+      font-size:.85rem;
+    }
+
+    .activity{
+      margin-top:16px;
+      padding:18px;
+      border-radius:18px;
+      background:rgba(0,0,0,.16);
+      border:1px solid rgba(255,255,255,.1);
+    }
+
+    .question{
+      margin:12px 0;
+      padding:13px;
+      border-radius:15px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .question label{
+      display:block;
+      color:var(--white);
+      font-weight:800;
+      margin-bottom:8px;
+    }
+
+    input[type="text"],
+    textarea,
+    select{
+      width:100%;
+      border:none;
+      outline:none;
+      border-radius:14px;
+      background:rgba(255,255,255,.08);
+      color:var(--white);
+      border:1px solid rgba(255,255,255,.13);
+      padding:12px 13px;
+    }
+
+    textarea{
+      min-height:90px;
+      resize:vertical;
+    }
+
+    .answer{
+      display:none;
+      margin-top:10px;
+      color:#d9ffe9;
+      background:rgba(84,214,160,.11);
+      border:1px solid rgba(84,214,160,.25);
+      border-radius:12px;
+      padding:10px 12px;
+    }
+
+    .answer.show{
+      display:block;
+    }
+
+    .feedback{
+      margin-top:10px;
+      font-weight:900;
+    }
+
+    .good{
+      color:var(--green);
+    }
+
+    .bad{
+      color:var(--red);
+    }
+
+    .reading{
+      background:linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.035));
+      border:1px solid rgba(255,255,255,.11);
+      border-radius:20px;
+      padding:22px;
+    }
+
+    .reading p{
+      font-size:1.02rem;
+    }
+
+    .highlight{
+      background:rgba(199,168,109,.28);
+      color:#fff7df;
+      border-radius:6px;
+      padding:1px 5px;
+      cursor:help;
+      position:relative;
+    }
+
+    .highlight:hover::after{
+      content:attr(data-tip);
+      position:absolute;
+      z-index:5;
+      left:0;
+      bottom:120%;
+      width:max-content;
+      max-width:260px;
+      background:#07111f;
+      border:1px solid rgba(255,255,255,.2);
+      color:var(--white);
+      border-radius:12px;
+      padding:8px 10px;
+      box-shadow:var(--shadow);
+      font-size:.85rem;
+    }
+
+    .prompt-box{
+      display:grid;
+      gap:12px;
+    }
+
+    .prompt-card{
+      padding:16px;
+      border-radius:17px;
+      background:rgba(255,255,255,.055);
+      border:1px solid rgba(255,255,255,.1);
+    }
+
+    .prompt-card strong{
+      color:var(--gold);
+    }
+
+    .timer-box{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      padding:18px;
+      border-radius:18px;
+      background:rgba(77,163,255,.1);
+      border:1px solid rgba(77,163,255,.22);
+      margin:16px 0;
+    }
+
+    .timer{
+      font-size:2rem;
+      font-weight:900;
+      color:var(--white);
+      letter-spacing:.03em;
+    }
+
+    .framework{
+      display:grid;
+      gap:14px;
+    }
+
+    .framework-row{
+      display:grid;
+      grid-template-columns:170px 1fr;
+      gap:12px;
+      align-items:start;
+      padding:14px;
+      border-radius:16px;
+      background:rgba(255,255,255,.045);
+      border:1px solid rgba(255,255,255,.09);
+    }
+
+    .framework-row .label{
+      font-weight:900;
+      color:var(--gold);
+    }
+
+    .checklist{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:10px;
+    }
+
+    .check{
+      display:flex;
+      gap:10px;
+      align-items:flex-start;
+      padding:12px;
+      border-radius:14px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      color:var(--soft);
+    }
+
+    .check input{
+      transform:scale(1.25);
+      margin-top:4px;
+    }
+
+    .print-banner{
+      display:none;
+    }
+
+    .floating-tools{
+      position:fixed;
+      right:18px;
+      bottom:18px;
+      z-index:20;
+      display:grid;
+      gap:10px;
+    }
+
+    .float-btn{
+      border:none;
+      border-radius:999px;
+      box-shadow:var(--shadow);
+      padding:12px 15px;
+      background:var(--gold);
+      color:#111;
+      font-weight:900;
+      cursor:pointer;
+    }
+
+    .toast{
+      position:fixed;
+      left:50%;
+      bottom:22px;
+      transform:translateX(-50%) translateY(100px);
+      background:#0b1627;
+      color:var(--white);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:999px;
+      padding:12px 18px;
+      box-shadow:var(--shadow);
+      opacity:0;
+      transition:.25s;
+      z-index:30;
+    }
+
+    .toast.show{
+      transform:translateX(-50%) translateY(0);
+      opacity:1;
+    }
+
+    details{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.09);
+      border-radius:16px;
+      padding:13px 15px;
+      margin:10px 0;
+    }
+
+    summary{
+      cursor:pointer;
+      color:var(--white);
+      font-weight:900;
+    }
+
+    @media(max-width:980px){
+      .hero-inner,
+      .layout{
+        grid-template-columns:1fr;
+      }
+
+      .sidebar{
+        position:static;
+      }
+
+      .nav{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+
+      .flash-grid{
+        grid-template-columns:repeat(3,minmax(0,1fr));
+      }
+    }
+
+    @media(max-width:680px){
+      section{
+        padding:20px;
+      }
+
+      .grid.two,
+      .grid.three,
+      .checklist{
+        grid-template-columns:1fr;
+      }
+
+      .flash-grid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+
+      .framework-row{
+        grid-template-columns:1fr;
+      }
+
+      .nav{
+        grid-template-columns:1fr;
+      }
+
+      .hero-actions{
+        flex-direction:column;
+      }
+
+      .btn{
+        width:100%;
+      }
+    }
+
+    @media print{
+      body{
+        background:#fff;
+        color:#111;
+      }
+
+      .sidebar,
+      .floating-tools,
+      .hero-actions,
+      .tabs,
+      .timer-box,
+      .toast{
+        display:none !important;
+      }
+
+      .hero,
+      .layout,
+      section{
+        padding:0;
+        margin:0;
+      }
+
+      .hero-inner,
+      .layout{
+        display:block;
+      }
+
+      section,
+      .hero-card,
+      .card,
+      .question,
+      .activity,
+      .reading,
+      details{
+        background:#fff !important;
+        color:#111;
+        box-shadow:none;
+        border:1px solid #ddd;
+        break-inside:avoid;
+      }
+
+      p,td,th,.small,.example,.check{
+        color:#111 !important;
+      }
+
+      h1,h2,h3,.section-kicker{
+        color:#111 !important;
+      }
+
+      .tab-panel{
+        display:block !important;
+      }
+
+      .flash-grid{
+        display:block;
+      }
+
+      .flashcard{
+        display:inline-block;
+        width:30%;
+        margin:6px;
+        vertical-align:top;
+      }
+
+      .flash-front,
+      .flash-back{
+        position:static;
+        transform:none;
+        min-height:auto;
+        color:#111;
+      }
+
+      .flash-back{
+        margin-top:6px;
+      }
+
+      .print-banner{
+        display:block;
+        border:1px solid #ddd;
+        padding:10px;
+        margin:10px 0;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <header class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="badge-row">
+          <span class="badge gold">B1 Speaking Lesson</span>
+          <span class="badge">Student: Belinay</span>
+          <span class="badge">Age: 15</span>
+          <span class="badge">60–75 minutes</span>
+        </div>
+        <h1>Heroes & Role Models</h1>
+        <p>
+          A meaningful speaking and vocabulary lesson about real-life heroes, family role models,
+          celebrities, everyday kindness, and inspiring qualities — personal, but not too private.
+        </p>
+        <div class="hero-actions">
+          <a href="#start"><button class="btn gold">Start Lesson</button></a>
+          <a href="#presentation"><button class="btn secondary">Mini Presentation</button></a>
+          <button class="btn secondary" onclick="window.print()">Print / Save as PDF</button>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="big-icon">🌟</div>
+        <h3>Today’s Main Language</h3>
+        <p><strong>Relative clauses:</strong> A role model is someone who helps others.</p>
+        <p><strong>Past simple:</strong> She started a kindness club.</p>
+        <p><strong>Present perfect:</strong> She has inspired many students.</p>
+        <p><strong>Modals:</strong> Role models should be honest.</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="sidebar">
+      <div class="nav-title">Lesson Menu</div>
+      <nav class="nav" id="nav">
+        <a href="#start">1. Goals</a>
+        <a href="#warmup">2. Warm-up</a>
+        <a href="#grammar">3. Grammar</a>
+        <a href="#mistakes">4. Turkish Mistakes</a>
+        <a href="#vocabulary">5. Vocabulary</a>
+        <a href="#practice">6. Practice</a>
+        <a href="#reading">7. Reading</a>
+        <a href="#discussion">8. Discussion</a>
+        <a href="#framework">9. Framework</a>
+        <a href="#presentation">10. Presentation</a>
+        <a href="#homework">11. Homework</a>
+      </nav>
+
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span>Progress</span>
+          <span id="progressText">0%</span>
+        </div>
+        <div class="progress"><span id="progressBar"></span></div>
+      </div>
+    </aside>
+
+    <div class="content">
+      <section id="start">
+        <div class="section-kicker">Lesson Overview</div>
+        <h2>1. Lesson Goals</h2>
+        <div class="grid two">
+          <div class="card blue">
+            <h3>Speaking Goals</h3>
+            <p>Belinay can describe a role model, give reasons, tell a short life story, and explain what makes someone inspiring.</p>
+          </div>
+          <div class="card gold">
+            <h3>Language Goals</h3>
+            <p>Use character adjectives, relative clauses with <strong>who</strong>, past simple, present perfect, and <strong>should / shouldn’t</strong>.</p>
+          </div>
+        </div>
+
+        <div class="note">
+          <strong>Safe speaking rule:</strong> You do not have to share private family problems or personal details.
+          You can talk about a teacher, celebrity, athlete, fictional character, or a general family role model.
+        </div>
+
+        <div class="checklist">
+          <label class="check"><input type="checkbox" class="progress-check"> I can explain what a role model is.</label>
+          <label class="check"><input type="checkbox" class="progress-check"> I can use “someone who...” correctly.</label>
+          <label class="check"><input type="checkbox" class="progress-check"> I can use 10+ character adjectives.</label>
+          <label class="check"><input type="checkbox" class="progress-check"> I can give a 1-minute presentation.</label>
+        </div>
+      </section>
+
+      <section id="warmup">
+        <div class="section-kicker">Speaking First</div>
+        <h2>2. Warm-up Questions</h2>
+        <p>Answer naturally. Try to give a reason for every answer.</p>
+
+        <div class="prompt-box">
+          <div class="prompt-card"><strong>1.</strong> What does “hero” mean to you?</div>
+          <div class="prompt-card"><strong>2.</strong> Can a normal person be a hero? Why?</div>
+          <div class="prompt-card"><strong>3.</strong> Who is more inspiring: a famous person or an ordinary person?</div>
+          <div class="prompt-card"><strong>4.</strong> Should celebrities be good role models? Why / why not?</div>
+          <div class="prompt-card"><strong>5.</strong> What small kind action can make someone’s day better?</div>
+          <div class="prompt-card"><strong>6.</strong> What qualities do you respect in people?</div>
+        </div>
+
+        <div class="activity">
+          <h3>Sentence Starters</h3>
+          <p><span class="pill">I think...</span> <span class="pill">In my opinion...</span> <span class="pill">For me...</span> <span class="pill">A good example is...</span></p>
+          <textarea data-save="warmup-notes" placeholder="Write 2–3 warm-up ideas here..."></textarea>
+        </div>
+      </section>
+
+      <section id="grammar">
+        <div class="section-kicker">Grammar Support</div>
+        <h2>3. Target Grammar</h2>
+
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="relatives">Relative Clauses</button>
+          <button class="tab-btn" data-tab="past">Past Simple</button>
+          <button class="tab-btn" data-tab="perfect">Present Perfect</button>
+          <button class="tab-btn" data-tab="modals">Should / Shouldn’t</button>
+        </div>
+
+        <div class="tab-panel active" id="relatives">
+          <div class="card blue">
+            <h3>Relative Clauses with “who”</h3>
+            <p>Use <strong>who</strong> to describe a person.</p>
+            <p><strong>Structure:</strong> A role model is someone who + verb + object/complement.</p>
+            <div class="grid two">
+              <div class="card dark">
+                <p>✅ A role model is someone <strong>who helps others</strong>.</p>
+                <p>✅ I admire people <strong>who stay calm</strong>.</p>
+                <p>✅ A good celebrity is someone <strong>who uses fame responsibly</strong>.</p>
+              </div>
+              <div class="card dark">
+                <p>❌ A role model is someone helps people.</p>
+                <p>✅ A role model is someone <strong>who helps people</strong>.</p>
+                <p class="small">Turkish idea: “yardım eden kişi” → English needs <strong>who</strong>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="past">
+          <div class="card gold">
+            <h3>Past Simple for Life Stories</h3>
+            <p>Use past simple for finished events in the past.</p>
+            <p><span class="pill blue">last year</span> <span class="pill blue">two years ago</span> <span class="pill blue">when she was younger</span> <span class="pill blue">in 2022</span></p>
+            <div class="card dark">
+              <p>She <strong>started</strong> a kindness club.</p>
+              <p>He <strong>grew up</strong> in a small town.</p>
+              <p>They <strong>raised</strong> money for poor families last year.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="perfect">
+          <div class="card blue">
+            <h3>Present Perfect for Achievements</h3>
+            <p>Use present perfect for achievements and life experiences when the exact time is not the main focus.</p>
+            <p><strong>Structure:</strong> has / have + V3</p>
+            <table>
+              <tr><th>Past Simple</th><th>Present Perfect</th></tr>
+              <tr><td>She started a project in 2021.</td><td>She has helped many students.</td></tr>
+              <tr><td>He won an award last year.</td><td>He has won three awards.</td></tr>
+              <tr><td>My aunt studied medicine.</td><td>My aunt has supported many patients.</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="modals">
+          <div class="card gold">
+            <h3>Should / Shouldn’t for Role Model Behavior</h3>
+            <p>Use <strong>should</strong> to say what is good, right, or responsible.</p>
+            <div class="grid two">
+              <div class="card dark">
+                <p>✅ Role models <strong>should be honest</strong>.</p>
+                <p>✅ Celebrities <strong>should use</strong> their influence carefully.</p>
+              </div>
+              <div class="card dark">
+                <p>❌ He should to be kind.</p>
+                <p>✅ He <strong>should be</strong> kind.</p>
+                <p class="small">Modal + base verb. No “to”.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="activity">
+          <h3>Quick Build</h3>
+          <p>Complete the sentences.</p>
+          <div class="question">
+            <label>1. A hero is someone who...</label>
+            <input type="text" data-save="grammar-q1" placeholder="Example: helps people in difficult times">
+          </div>
+          <div class="question">
+            <label>2. A celebrity should...</label>
+            <input type="text" data-save="grammar-q2" placeholder="Example: use their fame carefully">
+          </div>
+          <div class="question">
+            <label>3. My role model has...</label>
+            <input type="text" data-save="grammar-q3" placeholder="Example: inspired many people">
+          </div>
+        </div>
+      </section>
+
+      <section id="mistakes">
+        <div class="section-kicker">Turkish → English Accuracy</div>
+        <h2>4. Common Turkish Learner Mistakes</h2>
+
+        <table class="mistake-table">
+          <tr><th>Common Mistake</th><th>Better English</th><th>Why?</th></tr>
+          <tr><td>My role model is my mother because she is help me.</td><td>My role model is my mother because she helps me.</td><td>Use present simple: she helps.</td></tr>
+          <tr><td>A role model is someone helps people.</td><td>A role model is someone who helps people.</td><td>Use who for people.</td></tr>
+          <tr><td>She has 15 years old.</td><td>She is 15 years old.</td><td>Age uses be, not have.</td></tr>
+          <tr><td>I take example my father.</td><td>I look up to my father.</td><td>“Take example” is Turkish-style transfer.</td></tr>
+          <tr><td>She helped to people.</td><td>She helped people.</td><td>No to after help + person.</td></tr>
+          <tr><td>I admire to her.</td><td>I admire her.</td><td>No to after admire.</td></tr>
+          <tr><td>He has won the prize last year.</td><td>He won the prize last year.</td><td>Use past simple with exact past time.</td></tr>
+          <tr><td>She is a person which helps animals.</td><td>She is a person who helps animals.</td><td>Use who for people.</td></tr>
+          <tr><td>He should to be kind.</td><td>He should be kind.</td><td>Modal + base verb. No to.</td></tr>
+          <tr><td>She is very successful person.</td><td>She is a very successful person.</td><td>Use a/an before singular countable nouns.</td></tr>
+        </table>
+
+        <div class="activity">
+          <h3>Error Correction Mini Quiz</h3>
+          <div class="question">
+            <label>Correct: “A role model is someone helps others.”</label>
+            <input type="text" id="err1">
+            <button class="btn secondary" onclick="checkText('err1','A role model is someone who helps others.','err1fb')">Check</button>
+            <div id="err1fb" class="feedback"></div>
+          </div>
+          <div class="question">
+            <label>Correct: “He should to be honest.”</label>
+            <input type="text" id="err2">
+            <button class="btn secondary" onclick="checkText('err2','He should be honest.','err2fb')">Check</button>
+            <div id="err2fb" class="feedback"></div>
+          </div>
+          <div class="question">
+            <label>Correct: “I admire to her.”</label>
+            <input type="text" id="err3">
+            <button class="btn secondary" onclick="checkText('err3','I admire her.','err3fb')">Check</button>
+            <div id="err3fb" class="feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="vocabulary">
+        <div class="section-kicker">Vocabulary Builder</div>
+        <h2>5. 25 Vocabulary Items</h2>
+        <p>Click each card to see the Turkish meaning and example sentence.</p>
+
+        <div class="flash-grid" id="flashGrid"></div>
+
+        <details>
+          <summary>Open full vocabulary table</summary>
+          <table class="vocab-table" id="vocabTable"></table>
+        </details>
+      </section>
+
+      <section id="practice">
+        <div class="section-kicker">Controlled Practice</div>
+        <h2>6. Vocabulary & Grammar Practice</h2>
+
+        <div class="grid two">
+          <div class="activity">
+            <h3>Match the Meaning</h3>
+            <p>Choose the correct adjective.</p>
+            <div class="question">
+              <label>1. A person who does not give up easily is...</label>
+              <select id="match1">
+                <option value="">Choose</option>
+                <option>generous</option>
+                <option>determined</option>
+                <option>humble</option>
+              </select>
+            </div>
+            <div class="question">
+              <label>2. A person who tells the truth is...</label>
+              <select id="match2">
+                <option value="">Choose</option>
+                <option>honest</option>
+                <option>creative</option>
+                <option>patient</option>
+              </select>
+            </div>
+            <div class="question">
+              <label>3. A person who thinks about others’ feelings is...</label>
+              <select id="match3">
+                <option value="">Choose</option>
+                <option>thoughtful</option>
+                <option>confident</option>
+                <option>successful</option>
+              </select>
+            </div>
+            <button class="btn gold" onclick="checkMatching()">Check Answers</button>
+            <div id="matchFeedback" class="feedback"></div>
+          </div>
+
+          <div class="activity">
+            <h3>Complete the Sentences</h3>
+            <p>Use words from the lesson.</p>
+            <div class="question">
+              <label>1. I ________ my teacher because she is patient and supportive.</label>
+              <input id="fill1" type="text" placeholder="write the missing phrase">
+            </div>
+            <div class="question">
+              <label>2. You don’t need to be famous to ________.</label>
+              <input id="fill2" type="text" placeholder="write the missing phrase">
+            </div>
+            <div class="question">
+              <label>3. Celebrities have a lot of ________.</label>
+              <input id="fill3" type="text" placeholder="write the missing word">
+            </div>
+            <button class="btn gold" onclick="checkFill()">Check Answers</button>
+            <div id="fillFeedback" class="feedback"></div>
+          </div>
+        </div>
+
+        <div class="activity">
+          <h3>Speaking Builder: “Someone who...”</h3>
+          <div class="grid two">
+            <div class="question">
+              <label>A good friend is someone who...</label>
+              <input type="text" data-save="someone1">
+            </div>
+            <div class="question">
+              <label>A good celebrity is someone who...</label>
+              <input type="text" data-save="someone2">
+            </div>
+            <div class="question">
+              <label>A family role model is someone who...</label>
+              <input type="text" data-save="someone3">
+            </div>
+            <div class="question">
+              <label>I respect people who...</label>
+              <input type="text" data-save="someone4">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="reading">
+        <div class="section-kicker">Reading + Speaking</div>
+        <h2>7. Reading Text: An Inspiring Young Person</h2>
+
+        <div class="reading">
+          <h3>The Teenager Who Made a Difference</h3>
+          <p>
+            Maya is a 16-year-old student from a small city. When she was younger, she
+            <span class="highlight" data-tip="noticed = fark etti">noticed</span>
+            that some students at her school felt lonely during breaks. Some students were shy, and others had just moved to the city.
+            They didn’t know how to make friends.
+          </p>
+          <p>
+            At first, Maya didn’t know what to do. She was not a famous person, and she didn’t think she could change anything.
+            But one day, she saw a new student eating lunch alone. Maya sat next to her and started a conversation.
+            After that, she had an idea.
+          </p>
+          <p>
+            Maya started a small school club called “Sit With Us.” The idea was simple: no student should feel
+            <span class="highlight" data-tip="invisible = görünmez / fark edilmeyen">invisible</span>.
+            Club members invited lonely students to join games, lunch tables, and group activities.
+            In the beginning, only five students joined the club. After a few months, more than thirty students became members.
+          </p>
+          <p>
+            Maya <span class="highlight" data-tip="has helped = yardım etti / bugüne kadar yardım etmiş oldu">has helped</span>
+            many students feel more confident. She has also spoken at a school meeting about kindness and friendship.
+            Last year, her school gave her a kindness award. Maya said,
+            “You don’t have to be famous to be a role model. Sometimes, you only need to notice someone.”
+          </p>
+          <p>
+            Maya is inspiring because she is thoughtful, brave, and determined.
+            She shows that everyday kindness can make a real difference.
+          </p>
+        </div>
+
+        <div class="activity">
+          <h3>Reading Check</h3>
+          <div class="question">
+            <label>1. What problem did Maya notice at school?</label>
+            <textarea data-save="read1"></textarea>
+          </div>
+          <div class="question">
+            <label>2. What did Maya do when she saw a new student eating alone?</label>
+            <textarea data-save="read2"></textarea>
+          </div>
+          <div class="question">
+            <label>3. What has Maya helped students feel?</label>
+            <textarea data-save="read3"></textarea>
+          </div>
+          <div class="question">
+            <label>4. Why is Maya a good role model?</label>
+            <textarea data-save="read4"></textarea>
+          </div>
+          <button class="btn secondary" onclick="toggleAnswer('readingAnswers')">Show Suggested Answers</button>
+          <div class="answer" id="readingAnswers">
+            <p>1. She noticed that some students felt lonely during breaks.</p>
+            <p>2. She sat next to the student and started a conversation.</p>
+            <p>3. She has helped students feel more confident.</p>
+            <p>4. She is thoughtful, brave, determined, and she helps others through everyday kindness.</p>
+          </div>
+        </div>
+
+        <div class="activity">
+          <h3>Grammar Hunt</h3>
+          <p>Find examples in the reading.</p>
+          <div class="grid three">
+            <div class="question">
+              <label>Past simple verbs</label>
+              <input type="text" data-save="hunt-past" placeholder="noticed, started, ...">
+            </div>
+            <div class="question">
+              <label>Present perfect sentence</label>
+              <input type="text" data-save="hunt-perfect" placeholder="Maya has...">
+            </div>
+            <div class="question">
+              <label>Relative clause about Maya</label>
+              <input type="text" data-save="hunt-relative" placeholder="Maya is a student who...">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="discussion">
+        <div class="section-kicker">Fluency Practice</div>
+        <h2>8. Discussion Questions</h2>
+        <p>Choose a category. Speak for 45–60 seconds. Use vocabulary from the cards.</p>
+
+        <div class="timer-box">
+          <div class="timer" id="timer">01:00</div>
+          <button class="btn gold" onclick="startTimer(60)">Start 60s</button>
+          <button class="btn secondary" onclick="startTimer(90)">Start 90s</button>
+          <button class="btn secondary" onclick="resetTimer()">Reset</button>
+        </div>
+
+        <div class="tabs">
+          <button class="tab-btn active" data-tab="real">Real-Life Heroes</button>
+          <button class="tab-btn" data-tab="family">Family Role Models</button>
+          <button class="tab-btn" data-tab="celebs">Celebrities</button>
+          <button class="tab-btn" data-tab="kindness">Everyday Kindness</button>
+          <button class="tab-btn" data-tab="qualities">Inspiring Qualities</button>
+        </div>
+
+        <div class="tab-panel active" id="real">
+          <div class="prompt-box">
+            <div class="prompt-card"><strong>1.</strong> Can a teenager be a hero? Why?</div>
+            <div class="prompt-card"><strong>2.</strong> What is more heroic: saving someone’s life or helping someone every day?</div>
+            <div class="prompt-card"><strong>3.</strong> Are doctors, teachers, firefighters, and volunteers heroes? Why?</div>
+            <div class="prompt-card"><strong>4.</strong> What kind of problems do real-life heroes usually face?</div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="family">
+          <div class="prompt-box">
+            <div class="prompt-card"><strong>1.</strong> Can a family member be a role model?</div>
+            <div class="prompt-card"><strong>2.</strong> What qualities do you admire in older family members?</div>
+            <div class="prompt-card"><strong>3.</strong> Is it better for a role model to be perfect or realistic?</div>
+            <div class="prompt-card"><strong>4.</strong> What positive habit can young people learn from their families?</div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="celebs">
+          <div class="prompt-box">
+            <div class="prompt-card"><strong>1.</strong> Should celebrities be role models?</div>
+            <div class="prompt-card"><strong>2.</strong> Can a singer, actor, athlete, or influencer inspire teenagers?</div>
+            <div class="prompt-card"><strong>3.</strong> What should celebrities do with their fame?</div>
+            <div class="prompt-card"><strong>4.</strong> Can a celebrity be successful but not a good role model?</div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="kindness">
+          <div class="prompt-box">
+            <div class="prompt-card"><strong>1.</strong> What is a small kind action students can do at school?</div>
+            <div class="prompt-card"><strong>2.</strong> Why do some people ignore lonely people?</div>
+            <div class="prompt-card"><strong>3.</strong> How can one kind sentence change someone’s day?</div>
+            <div class="prompt-card"><strong>4.</strong> Is kindness a strength or a weakness?</div>
+          </div>
+        </div>
+
+        <div class="tab-panel" id="qualities">
+          <div class="prompt-box">
+            <div class="prompt-card"><strong>1.</strong> Which quality is more important: honesty or confidence?</div>
+            <div class="prompt-card"><strong>2.</strong> Which quality is harder: patience or bravery?</div>
+            <div class="prompt-card"><strong>3.</strong> Can a person be successful without being kind?</div>
+            <div class="prompt-card"><strong>4.</strong> What quality do you want to improve in yourself?</div>
+          </div>
+        </div>
+
+        <div class="activity">
+          <h3>Useful Speaking Frames</h3>
+          <p><span class="pill">I look up to...</span> <span class="pill">Someone who inspires me is...</span> <span class="pill">I admire people who...</span> <span class="pill">This person has...</span> <span class="pill">Role models should...</span></p>
+          <textarea data-save="discussion-notes" placeholder="Write useful ideas or teacher feedback here..."></textarea>
+        </div>
+      </section>
+
+      <section id="framework">
+        <div class="section-kicker">Speaking Structure</div>
+        <h2>9. Role Model Description Framework</h2>
+        <p>Use this framework to prepare a clear B1-level answer.</p>
+
+        <div class="framework">
+          <div class="framework-row">
+            <div class="label">1. Introduction</div>
+            <div>My role model is ________. I look up to this person because ________.</div>
+          </div>
+          <div class="framework-row">
+            <div class="label">2. Identity</div>
+            <div>He/She is someone who ________. He/She is known for ________.</div>
+          </div>
+          <div class="framework-row">
+            <div class="label">3. Character</div>
+            <div>I think this person is ________, ________, and ________.</div>
+          </div>
+          <div class="framework-row">
+            <div class="label">4. Life Story</div>
+            <div>When he/she was younger, he/she ________. He/She faced ________, but he/she ________.</div>
+          </div>
+          <div class="framework-row">
+            <div class="label">5. Achievements</div>
+            <div>He/She has ________. He/She has helped/inspired ________.</div>
+          </div>
+          <div class="framework-row">
+            <div class="label">6. Lesson</div>
+            <div>This person teaches me that ________. I think we should ________.</div>
+          </div>
+        </div>
+
+        <details>
+          <summary>Show B1 Model Answer</summary>
+          <div class="card dark">
+            <p>
+              My role model is my older cousin. I look up to her because she is hardworking and supportive.
+              She is someone who always tries to help people around her.
+            </p>
+            <p>
+              When she was younger, she studied a lot because she wanted to become a doctor.
+              She faced many challenges, but she didn’t give up. She has passed difficult exams and has helped many people in her hospital.
+            </p>
+            <p>
+              I think she is determined, patient, and kind-hearted. She teaches me that success is not only about talent.
+              It is also about effort and responsibility. I believe role models should be honest and helpful,
+              but they shouldn’t act like they are better than other people.
+            </p>
+          </div>
+        </details>
+      </section>
+
+      <section id="presentation">
+        <div class="section-kicker">Production Task</div>
+        <h2>10. Mini Presentation: Someone Who Inspires Me</h2>
+
+        <div class="card gold">
+          <h3>Choose One Person</h3>
+          <p>
+            a real-life hero, family role model, teacher, celebrity, athlete, fictional character,
+            everyday kind person, or a young person like Maya.
+          </p>
+        </div>
+
+        <div class="grid two">
+          <div class="card blue">
+            <h3>You Must Include</h3>
+            <p>✅ 3 character adjectives</p>
+            <p>✅ 2 relative clauses with <strong>who</strong></p>
+            <p>✅ 2 past simple sentences</p>
+            <p>✅ 2 present perfect sentences</p>
+            <p>✅ 2 sentences with <strong>should / shouldn’t</strong></p>
+          </div>
+
+          <div class="card dark">
+            <h3>Presentation Starter</h3>
+            <p>
+              Today, I want to talk about ________. He/She is someone who ________.
+              I chose this person because ________. When he/she was younger, he/she ________.
+              He/She has ________. I think this person is ________, ________, and ________.
+              This person teaches me that ________.
+            </p>
+          </div>
+        </div>
+
+        <div class="activity">
+          <h3>Presentation Planner</h3>
+          <div class="grid two">
+            <div class="question"><label>Name / identity</label><input type="text" data-save="plan-name"></div>
+            <div class="question"><label>Why I chose this person</label><input type="text" data-save="plan-why"></div>
+            <div class="question"><label>3 character adjectives</label><input type="text" data-save="plan-adj"></div>
+            <div class="question"><label>What this person did in the past</label><input type="text" data-save="plan-past"></div>
+            <div class="question"><label>What this person has achieved</label><input type="text" data-save="plan-achieved"></div>
+            <div class="question"><label>What we should learn</label><input type="text" data-save="plan-learn"></div>
+          </div>
+          <div class="question">
+            <label>Write your full 1-minute speech here</label>
+            <textarea data-save="full-speech" placeholder="Today, I want to talk about..."></textarea>
+          </div>
+          <button class="btn gold" onclick="saveAll()">Save My Work</button>
+          <button class="btn secondary" onclick="clearSaved()">Clear Saved Work</button>
+        </div>
+
+        <div class="activity">
+          <h3>Teacher Feedback Checklist</h3>
+          <div class="checklist">
+            <label class="check"><input type="checkbox" class="progress-check"> Uses “who” correctly</label>
+            <label class="check"><input type="checkbox" class="progress-check"> Uses past simple for finished events</label>
+            <label class="check"><input type="checkbox" class="progress-check"> Uses present perfect for achievements</label>
+            <label class="check"><input type="checkbox" class="progress-check"> Uses character adjectives</label>
+            <label class="check"><input type="checkbox" class="progress-check"> Uses should / shouldn’t correctly</label>
+            <label class="check"><input type="checkbox" class="progress-check"> Gives reasons and examples</label>
+          </div>
+        </div>
+      </section>
+
+      <section id="homework">
+        <div class="section-kicker">After Class</div>
+        <h2>11. Homework</h2>
+
+        <div class="grid three">
+          <div class="card blue">
+            <h3>Part 1: Vocabulary</h3>
+            <p>Choose 10 words from the vocabulary list and write one sentence for each.</p>
+            <p class="small">Example: My sister is determined because she never gives up.</p>
+          </div>
+          <div class="card gold">
+            <h3>Part 2: Writing</h3>
+            <p>Write 120–150 words about a role model.</p>
+            <p>Use 5 vocabulary words, 2 sentences with <strong>who</strong>, 2 past simple sentences, 2 present perfect sentences, and 2 should/shouldn’t sentences.</p>
+          </div>
+          <div class="card blue">
+            <h3>Part 3: Speaking</h3>
+            <p>Prepare a 1-minute speech titled <strong>Someone Who Inspires Me</strong>.</p>
+            <p class="small">Practice once slowly, then once naturally.</p>
+          </div>
+        </div>
+
+        <div class="activity">
+          <h3>Homework Writing Area</h3>
+          <textarea data-save="homework-writing" placeholder="Write your 120–150 word homework here..."></textarea>
+        </div>
+
+        <details>
+          <summary>Optional Extension: Should celebrities be role models?</summary>
+          <div class="card dark">
+            <p><strong>Writing frame:</strong></p>
+            <p>
+              I think celebrities should / shouldn’t be role models because ________.
+              First, ________. Also, ________. However, ________. In conclusion, ________.
+            </p>
+          </div>
+        </details>
+
+        <div class="note">
+          <strong>Final reflection:</strong> What quality do you admire most in a role model?
+          What kind of person do you want to become?
+          What is one small kind action you can do this week?
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="floating-tools">
+    <button class="float-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Top</button>
+    <button class="float-btn" onclick="window.print()">Print</button>
+  </div>
+
+  <div class="toast" id="toast">Saved!</div>
+</div>
+
+<script>
+  const vocab = [
+    ["role model","rol model","someone you admire and learn from","My sister is my role model."],
+    ["hero","kahraman","someone brave or inspiring","A hero helps people in difficult times."],
+    ["inspiring","ilham verici","making people feel motivated","Her story is inspiring."],
+    ["brave","cesur","not afraid to do difficult things","Firefighters are brave."],
+    ["kind-hearted","iyi kalpli","very kind and caring","My grandmother is kind-hearted."],
+    ["generous","cömert","happy to give or share","He is generous with his time."],
+    ["honest","dürüst","telling the truth","A role model should be honest."],
+    ["respectful","saygılı","showing respect","Students should be respectful."],
+    ["determined","kararlı","not giving up easily","She is determined to succeed."],
+    ["hardworking","çalışkan","working with effort","My father is hardworking."],
+    ["confident","özgüvenli","believing in yourself","She sounds confident when she speaks."],
+    ["humble","alçakgönüllü","not acting superior","A good hero is humble."],
+    ["responsible","sorumluluk sahibi","doing what you should do","Celebrities should be responsible."],
+    ["supportive","destekleyici","helping emotionally or practically","My teacher is very supportive."],
+    ["patient","sabırlı","staying calm while waiting","My mother is patient with me."],
+    ["creative","yaratıcı","having new ideas","Creative people solve problems differently."],
+    ["thoughtful","düşünceli","thinking about others’ feelings","It was thoughtful of her to help."],
+    ["achievement","başarı","something successful you have done","Winning the prize was a big achievement."],
+    ["influence","etki","power to affect people","Celebrities have a lot of influence."],
+    ["challenge","zorluk","a difficult situation","She faced many challenges."],
+    ["overcome","üstesinden gelmek","to succeed after difficulty","He overcame many problems."],
+    ["raise awareness","farkındalık yaratmak","help people understand an issue","She raised awareness about bullying."],
+    ["volunteer","gönüllü olmak","help without payment","He volunteers at an animal shelter."],
+    ["look up to","örnek almak / hayran olmak","admire and respect","I look up to my older cousin."],
+    ["make a difference","fark yaratmak","create a positive change","Small acts of kindness can make a difference."]
+  ];
+
+  function buildVocab(){
+    const grid = document.getElementById("flashGrid");
+    const table = document.getElementById("vocabTable");
+
+    grid.innerHTML = vocab.map((v, i) => `
+      <div class="flashcard" onclick="this.classList.toggle('flipped')" tabindex="0" role="button" aria-label="Vocabulary card ${v[0]}">
+        <div class="flash-inner">
+          <div class="flash-front">
+            <div>
+              <div class="word">${i+1}. ${v[0]}</div>
+              <div class="example">Click for Turkish</div>
+            </div>
+            <div class="small">${v[2]}</div>
+          </div>
+          <div class="flash-back">
+            <div>
+              <div class="tr">${v[1]}</div>
+              <div class="small">${v[2]}</div>
+            </div>
+            <div class="example">${v[3]}</div>
+          </div>
+        </div>
+      </div>
+    `).join("");
+
+    table.innerHTML = `
+      <tr><th>#</th><th>English</th><th>Turkish</th><th>Simple Meaning</th><th>Example</th></tr>
+      ${vocab.map((v,i)=>`<tr><td>${i+1}</td><td>${v[0]}</td><td>${v[1]}</td><td>${v[2]}</td><td>${v[3]}</td></tr>`).join("")}
+    `;
+  }
+
+  buildVocab();
+
+  document.querySelectorAll(".tab-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const parentSection = btn.closest("section");
+      const id = btn.dataset.tab;
+      parentSection.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+      parentSection.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+      btn.classList.add("active");
+      const panel = parentSection.querySelector("#" + id);
+      if(panel) panel.classList.add("active");
+    });
+  });
+
+  function normalize(str){
+    return (str || "")
+      .toLowerCase()
+      .replace(/[’']/g,"")
+      .replace(/[.?!]/g,"")
+      .replace(/\s+/g," ")
+      .trim();
+  }
+
+  function checkText(inputId, answer, fbId){
+    const val = normalize(document.getElementById(inputId).value);
+    const ans = normalize(answer);
+    const fb = document.getElementById(fbId);
+    if(val === ans){
+      fb.textContent = "Excellent!";
+      fb.className = "feedback good";
+    } else {
+      fb.textContent = "Try again. Correct answer: " + answer;
+      fb.className = "feedback bad";
+    }
+  }
+
+  function checkMatching(){
+    const correct = {
+      match1:"determined",
+      match2:"honest",
+      match3:"thoughtful"
+    };
+    let score = 0;
+    Object.keys(correct).forEach(id => {
+      if(document.getElementById(id).value === correct[id]) score++;
+    });
+    const fb = document.getElementById("matchFeedback");
+    fb.textContent = `Score: ${score}/3`;
+    fb.className = score === 3 ? "feedback good" : "feedback bad";
+  }
+
+  function checkFill(){
+    const answers = {
+      fill1:["look up to"],
+      fill2:["make a difference"],
+      fill3:["influence"]
+    };
+    let score = 0;
+    Object.keys(answers).forEach(id => {
+      const val = normalize(document.getElementById(id).value);
+      if(answers[id].some(a => normalize(a) === val)) score++;
+    });
+    const fb = document.getElementById("fillFeedback");
+    fb.textContent = `Score: ${score}/3`;
+    fb.className = score === 3 ? "feedback good" : "feedback bad";
+  }
+
+  function toggleAnswer(id){
+    document.getElementById(id).classList.toggle("show");
+  }
+
+  let timerInterval = null;
+  let currentSeconds = 60;
+
+  function renderTimer(){
+    const m = String(Math.floor(currentSeconds/60)).padStart(2,"0");
+    const s = String(currentSeconds%60).padStart(2,"0");
+    document.getElementById("timer").textContent = `${m}:${s}`;
+  }
+
+  function startTimer(seconds){
+    clearInterval(timerInterval);
+    currentSeconds = seconds;
+    renderTimer();
+    timerInterval = setInterval(() => {
+      currentSeconds--;
+      renderTimer();
+      if(currentSeconds <= 0){
+        clearInterval(timerInterval);
+        showToast("Time is up! Great speaking practice.");
+      }
+    },1000);
+  }
+
+  function resetTimer(){
+    clearInterval(timerInterval);
+    currentSeconds = 60;
+    renderTimer();
+  }
+
+  function saveAll(){
+    document.querySelectorAll("[data-save]").forEach(el => {
+      localStorage.setItem("belinay-heroes-" + el.dataset.save, el.value);
+    });
+    showToast("Saved!");
+  }
+
+  function loadAll(){
+    document.querySelectorAll("[data-save]").forEach(el => {
+      const saved = localStorage.getItem("belinay-heroes-" + el.dataset.save);
+      if(saved !== null) el.value = saved;
+      el.addEventListener("input", () => {
+        localStorage.setItem("belinay-heroes-" + el.dataset.save, el.value);
+      });
+    });
+  }
+
+  function clearSaved(){
+    if(confirm("Clear all saved writing and notes on this page?")){
+      document.querySelectorAll("[data-save]").forEach(el => {
+        localStorage.removeItem("belinay-heroes-" + el.dataset.save);
+        el.value = "";
+      });
+      showToast("Cleared!");
+    }
+  }
+
+  function showToast(message){
+    const toast = document.getElementById("toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 2200);
+  }
+
+  function updateProgress(){
+    const checks = Array.from(document.querySelectorAll(".progress-check"));
+    const done = checks.filter(c => c.checked).length;
+    const percent = checks.length ? Math.round((done / checks.length) * 100) : 0;
+    document.getElementById("progressBar").style.width = percent + "%";
+    document.getElementById("progressText").textContent = percent + "%";
+    localStorage.setItem("belinay-heroes-progress", JSON.stringify(checks.map(c => c.checked)));
+  }
+
+  function loadProgress(){
+    const saved = JSON.parse(localStorage.getItem("belinay-heroes-progress") || "[]");
+    const checks = Array.from(document.querySelectorAll(".progress-check"));
+    checks.forEach((c,i) => {
+      if(saved[i]) c.checked = true;
+      c.addEventListener("change", updateProgress);
+    });
+    updateProgress();
+  }
+
+  function navHighlight(){
+    const sections = Array.from(document.querySelectorAll("section[id]"));
+    const navLinks = Array.from(document.querySelectorAll(".nav a"));
+    const top = window.scrollY + 120;
+    let current = sections[0].id;
+    sections.forEach(sec => {
+      if(sec.offsetTop <= top) current = sec.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle("active", a.getAttribute("href") === "#" + current);
+    });
+  }
+
+  window.addEventListener("scroll", navHighlight);
+  loadAll();
+  loadProgress();
+  navHighlight();
+</script>
+</body>
+</html>
